@@ -36,14 +36,39 @@ Vivamus sagittis lacus vel augue rutrum faucibus dolor auctor. Duis mollis, est 
 Cum sociis natoque penatibus et magnis dis `code element` montes, nascetur ridiculus mus.
 
 {% highlight js %}
-// Example can be run directly in your JavaScript console
+int nombreX = 20;
+int nombreY = 20;
+int largeur; // largeur de mon "carré"
+int hauteur; // hauteur de mon "carré"
+int posX = 0;
+int posY = 0;
+int bascule = 1;
 
-// Create a function that takes two arguments and returns the sum of those arguments
-var adder = new Function("a", "b", "return a + b");
-
-// Call the function
-adder(2, 6);
-// > 8
+void setup() {
+  size(600,600);
+  noStroke();
+  largeur = width/nombreX;
+  hauteur = height/nombreY;
+}
+void draw() {
+  if (bascule == 1) {
+    fill(255);
+  } else {
+    fill(0);
+  }
+  rect(posX, posY, largeur, hauteur);
+  posX = posX + largeur;
+  bascule = bascule*(-1);
+  if (posX >= width) {
+    posX = 0;
+    posY = posY + hauteur;
+    bascule = bascule*(-1);
+  }
+  if(posY == height) {
+    save("grid-"+hour()+"-"+minute()+"-"+second()+".png"); 
+    exit();
+  }
+}
 {% endhighlight %}
 
 Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.
